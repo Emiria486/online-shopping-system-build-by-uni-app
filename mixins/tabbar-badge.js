@@ -1,4 +1,6 @@
-import { mapGetters } from 'vuex'
+import {
+  mapGetters
+} from 'vuex'
 
 // 导出一个 mixin 对象
 export default {
@@ -8,6 +10,14 @@ export default {
   onShow() {
     // 在页面刚展示的时候，设置数字徽标
     this.setBadge()
+  },
+  watch:{
+    total: {
+      handler(newVal) {
+        this.setBadge()
+      },
+      immediate: true
+    }
   },
   methods: {
     setBadge() {

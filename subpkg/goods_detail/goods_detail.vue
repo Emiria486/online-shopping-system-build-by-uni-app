@@ -7,7 +7,7 @@
       </swiper-item>
     </swiper>
     <!-- 商品信息区域 -->
-    <view class="goods-info-box" v-cloak v-if="goods_info">
+    <view class="goods-info-box" v-cloak v-if="status">
       <!-- 商品价格 -->
       <view class="price">￥{{goods_info.goods_price}}</view>
       <!-- 信息主体区域 -->
@@ -48,6 +48,8 @@
   export default {
     data() {
       return {
+        // 用于解决网络数据到达前数据显示undef的状态，默认为零
+        status:false,
         // 商品详情对象
         goods_info: {},
         // 左侧按钮组的配置对象
@@ -114,6 +116,8 @@
         res.message.goods_introduce = res.message.goods_introduce.replace(/<img /g, '<img style="display:block;" ')
           .replace(/webp/g, 'jpg')
         this.goods_info = res.message
+        // 数据到达改变状态
+        this.status=true
       },
       preview(i) {
         // 调用 uni.previewImage() 方法预览图片
